@@ -1,0 +1,36 @@
+.wrapper {
+    display: flex;
+    background-color: #E6F3FF;
+}
+.user-login {
+    display: flex;
+    height: 80vh;
+    width: 80%;
+    margin: 10vh auto;
+    justify-content: center;
+    border: 2px solid grey;
+    border-radius: 10px;
+    background-color: white;
+}
+.login-form {
+    flex-basis: 50%;
+    margin: auto 10rem ;
+    border-right: 2px solid blue;
+    padding-right: 10rem;
+    min-width: 25%;
+    text-align: center;
+    margin-right: 0;
+}
+.password-link {
+    margin-right: -18rem;
+    font-size: 0.7rem;
+}
+.login-img {
+    flex-basis: 50%;
+}
+.img-fluid {
+    border-radius: 15px;
+}
+.user-login a {
+    text-decoration: none;
+}

@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Dashboard</title>
+    <style>
+        table{
+            width:80%;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:50px;
+            font-size:25px;
+        }
+
+        .table-head{
+            text-align:center;
+            border:solid black 1px;
+            height:50px;
+            background-image: linear-gradient(45deg, #bed3ed , #ffffff);
+        }
+
+        .table-data{
+            text-align:center;
+            border:solid black 1px;
+            height:50px;
+        }
+
+        .deadline{
+            margin-left:50px;
+            margin-top:50px;
+        }
+
+        .deadline-list{
+            font-size:20px;
+        }
+
+        .date{
+            font-weight:bold;
+            color:#991d1d;
+        }
+
+    </style>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            packages: ['corechart']
+        });
+    </script>
+{% endblock %}
+{% block main %}
+ <h1 style="text-align:center;">Welcome to our Web-app</h1>
+
+ <table>
+     <thead>
+         <th class="table-head">Total Projects</th>
+         <th class="table-head">Completed Projects</th>
+         <th class="table-head">Working On</th>
+     </thead>
+     <tbody>
+         <td class="table-data">{{ total }}</td>
+         <td class="table-data">{{ completed }}</td>
+         <td class="table-data">{{ incomplete}}</td>
+     </tbody>
+ </table>
+
+
+ <div class="deadline">
+     <h3 >Deadline:</h3>
+     <ul class="deadline-list">
+         {% if incomplete != 0 %}
+         {% for project in incomplete_projects %}
+         <li><b>{{ project.project_name }}</b> is due on <span class="date">{{ project.completion_date }}</span> .</li>
+         {% endfor %}
+         {% else %}
+         No deadlines pending
+         {% endif %}
+     </ul>
+ </div>
+
+    <h3 style="margin-left: 50px; margin-top:50px; ">Performance in 2021:</h3>
+ <div id="container" style="width: 850px; height: 700px; margin: 0 auto; border:solid black 1px;"></div>
+    <script language="JavaScript">
+        function drawChart() {
+            /* Define the chart to be drawn.*/
+            var data = google.visualization.arrayToDataTable([
+                ['Months', 'No. of projects'],
+                ['January', {{ project_month.1 }}],
+                ['February', {{ project_month.2 }}],
+                ['March', {{ project_month.3 }}],
+                ['April', {{ project_month.4 }}],
+                ['May', {{ project_month.5 }}],
+                ['June', {{ project_month.6 }}],
+                ['July', {{ project_month.7 }}],
+                ['August', {{ project_month.8 }}],
+                ['September', {{ project_month.9 }}],
+                ['October', {{ project_month.10 }}],
+                ['November', {{ project_month.11 }}],
+                ['December', {{ project_month.12 }}]
+            ]);
+            var options = {
+                title: 'No. of projects month-wise',
+                isStacked: true
+            };
+            /* Instantiate and draw the chart.*/
+            var chart = new google.visualization.BarChart(document.getElementById('container'));
+            chart.draw(data, options);
+        }
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
+
+{% endblock %}

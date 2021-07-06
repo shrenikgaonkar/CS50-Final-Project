@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Profile</title>
+    <!--style>
+        .fields{
+            margin-left:50px;
+            margin-top:20px;
+        }
+        .submit{
+            margin-left:400px;
+            margin-top:20px;
+        }
+        .submit:hover{
+            background-color:#2571F9;
+            color:#FFFFFF;
+        }
+        .name{
+            margin-left:99px;
+        }
+        .email{
+            margin-left:83px;
+        }
+        .contact{
+            margin-left:58px;
+        }
+        .dob{
+            margin-left:50px;
+        }
+        .joining_date{
+            margin-left:50px;
+        }
+        .profile_pic{
+            margin-left:50px;
+        }
+    </style-->
+{% endblock %}
+{% block mainclass %}profile{% endblock %}
+{% block main %}
+    <div class="profile-pic profile-left">
+        <form action="/delete_profile_pic" method="post" class="remove-profile"  data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Remove Profile Pic">
+            <input type="submit" value="X" {% if document_status.profile_pic != 'YES' %}
+                disabled style="cursor: not-allowed;"
+                {% endif %}
+                class="remove-profile-item">
+        </form>
+        {% if document_status.profile_pic == 'YES' %}
+            <img src="{{ profile_pic_name }}" alt="Profile Pic" class="profile-pic-item">
+        {% else %}
+            <img src="/static/default-profile-pic.png" alt="Profile Pic" class="profile-pic-item">
+        {% endif %}
+        <form action="/add_profile_pic" method="post" enctype=multipart/form-data style="display: flex; flex-flow:column; align-items: center;">
+            <input type="file" name="profile_pic" style="display:block; padding-right:0px; font-size:12px; margin-top:20px">{% if document_status.profile_pic == 'YES' %}
+            <input type="submit" value="Change Profile Picture" class="btn btn-primary" style="display: block; font-size:12px; margin-top:10px;">
+            {% else %}
+            <input type="submit" value="Add Profie Picture" class="btn btn-primary" style="display: block; font-size:12px; margin-top:10px;">
+            {% endif %}
+        </form>
+    </div>
+    <div class="details profile-right">
+        <fieldset class="basic-info">
+            <legend>Basic Information</legend>
+            <div class="fields">
+                <strong>Name</strong><span class="name"></span>: {{ data.first_name }} {{ data.surname }}
+            </div>
+            <div class="fields">
+                <strong>Email-id</strong><span class="email"></span>: {{ data.email }}
+            </div>
+            <div class="fields">
+                <strong>Contact</strong><span class="contact"></span>: {{ data.contact }}
+            </div>
+            <div class="fields">
+                <strong>Date of Birth</strong><span class="dob"></span>: {{ data.dob }}
+            </div>
+            <div class="fields">
+                <strong>Joining Date</strong><span class="joining_date"></span>: {{ data.joining_date }}
+            </div>
+            <div class="fields">
+                <form action="/profile" method="post" >
+                    <input class="submit btn btn-primary" type="submit" value="Edit Profile">
+                </form>
+            </div>
+        </fieldset>
+        <fieldset class="documents">
+            <legend>Documents</legend>
+            <div class="document-info">
+                <p>Pan Card:</p>
+                {% if document_status.pancard == 'YES' %}
+                    <a href="{{ pancard_name }}"><img src="/static/pdf_icon.png" alt="Pancard" style="width: 30px; height: 30px;"></a>
+                {% endif %}
+            </div>
+            <div>
+                <form action="/add_pancard" method="post" enctype=multipart/form-data class="document-upload">
+                    <input type="file" name="pancard">
+                    {% if document_status.pancard == 'YES' %}
+                        <input type="submit" value="Change Pancard"  class="btn btn-primary">
+                    {% else %}
+                        <input type="submit" value="Add pancard"  class="btn btn-primary">
+                    {% endif %}
+                </form>
+            </div>
+            <div class="document-info">
+                <p>Adhaar Card:</p>
+                {% if document_status.adhaar == 'YES' %}
+                    <a href="{{ adhaar_name }}"><img src="/static/pdf_icon.png" alt="Adhaar Card" style="width: 30px; height: 30px;"></a>
+                {% endif %}
+            </div>
+            <div>
+                <form action="/add_adhaar" method="post" enctype=multipart/form-data class="document-upload">
+                    <input type="file" name="adhaar">
+                    {% if document_status.adhaar == 'YES' %}
+                        <input type="submit" value="Change Adhaar Card" class="btn btn-primary">
+                    {% else %}
+                        <input type="submit" value="Add Adhaar Card" class="btn btn-primary">
+                    {% endif %}
+                </form>
+            </div>
+        </fieldset>
+    </div>
+{% endblock %}

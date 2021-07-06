@@ -1,0 +1,164 @@
+.wrapper {
+    background-color: #E6F3FF;
+    min-height: 100vh;
+}
+.navigation-bar{
+    box-shadow: 0 0 10px 0 grey;
+    margin-bottom: 20px;
+}
+.nav-items {
+    text-decoration: none;
+}
+.user-active-image {
+    max-height: 50px;
+    max-width: 50px;
+}
+.main-nav .nav-item:active {
+    border-bottom: 5px solid blue;
+    margin-bottom: -5px;
+}
+.dropdown-toggle {
+    margin-top: -1px;
+    font-size: 1.5rem;
+}
+.main {
+    width: 80%;
+    min-height: 79vh;
+    margin: 40px auto;
+    background-color: white;
+    padding: 20px;
+}
+.project-list{
+    border-top: 2px solid darkgray;
+    margin: 20px 0;
+    padding-top: 10px;
+}
+.title-row {
+    margin-right: 40px;
+    margin-left: 20px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    list-style: none;
+    text-align: center;
+    font-weight: bold;
+}
+.project-row {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    list-style: none;
+    text-align: center;
+}
+.project {
+    flex-basis: 40%;
+}
+.role {
+    flex-basis: 10%;
+}
+.starting-date {
+    flex-basis: 30%;
+}
+.status {
+    flex-basis: 20%;
+}
+.accordion-item {
+    margin-bottom: 2px;
+}
+
+.profile-pic {
+    text-align: center;
+    padding-top: 20px;
+    margin: 10px auto;
+}
+
+.profile-pic-item {
+    width: 150px;
+    border: 1px solid black;
+    border-radius: 100%;
+}
+.remove-profile {
+    position:relative;
+    margin-bottom: -15px;
+    margin-right: -130px;
+    font-size: 10px;
+    z-index: 10;
+}
+.remove-profile-item {
+    border-radius: 9px;
+    border: 1px solid black;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+.details {
+    background-color: white;
+    width: 50%;
+    margin: 10px auto;
+    padding: auto;
+}
+.row-detail{
+    display: flex;
+    padding-bottom: 5px;
+}
+.info-type {
+    flex-basis: 40%;
+    text-align: right;
+    margin-right: 10px;
+}
+textarea {
+	height: 10rem;
+	padding: 1rem;
+}
+.profile {
+    display:flex;
+}
+.profile-left {
+    flex-basis: 30%;
+    align-items: center;
+    margin: auto;
+    margin-right:-100px;
+}
+.profile-right {
+    border-left: 2px solid blue;
+    padding-left: 2rem;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: unset;
+}
+.basic-info {
+    display: flex;
+    margin-right: -100px;
+    flex-flow: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.fields {
+    margin-bottom: 5px;
+}
+legend {
+    color: purple;
+    font-weight: bold;
+}
+.documents {
+    border-top: 1px solid grey;
+}
+.document-upload {
+    display: flex;
+    margin-right: -100px;
+    padding: 0 100px;
+    justify-content: space-between;
+}
+.document-info {
+    display: flex;
+    margin-right: -100px;
+    padding: 0 100px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.document-info p{
+    font-weight: bold;
+    margin-left: -40px;
+}

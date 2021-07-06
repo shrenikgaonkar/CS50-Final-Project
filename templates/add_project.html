@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Add Project</title>
+{% endblock %}
+{% block main %}
+    <form action="/add_project" method="post">
+        <div class="details">
+            <div class="row-detail">
+                <label for="project_name" class="info-type">Project Name:</label>
+                <input name="project_name" type="text" autofocus autocomplete="off" placeholder="Enter Project Name">
+            </div>
+            <div class="row-detail">
+                <label for="starting_date" class="info-type">Starting Date:</label>
+                <input name="starting_date" type="date" autocomplete="off" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="row-detail">
+                <label for="completion_date" class="info-type">Completion Date</label>
+                <input name="completion_date" type="date" autocmplete="off" placeholder="DD/MM/YYYY">
+            </div>
+            <div class="row-detail">
+                <label for="status" class="info-type">Status:</label>
+                <select name="status">
+                    <option disabled selected value="">Choose Status</option>
+                    <option value="completed">Completed</option>
+                    <option value="pending">Pending/Working on</option>
+                </select>
+            </div>
+            <div class="row-detail">
+                <label for="role" class="info-type">Role:</label>
+                <input name="role" type="text" autocomplete="off" placeholder="Enter your role in the project">
+            </div>
+            <div class="row-detail">
+                <label for="description" class="info-type">Description:</label>
+        		<textarea name="description" placeholder="Work Done by you" autocomplete="off" style=""></textarea>
+            </div>
+        </div>
+        <div class="d-grid col-1 submit mx-auto" style="margin-top: 20px;">
+            <input type="submit" value="Save" class="btn btn-primary">
+        </div>
+    </form>
+    {{ apology }}
+{% endblock %}

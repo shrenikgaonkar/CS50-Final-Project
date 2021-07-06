@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Projects</title>
+{% endblock %}
+{% block main %}
+    <div class="d-grid gap-2 d-md-flex justify-content-end">
+                <a class="btn btn-primary" href="/add_project"> + Add new Project</a>
+    </div>
+    <div class="project-list">
+        <div class="projects">
+            <div>
+                <ul class="title-row">
+                    <li class="project">Project</li>
+                    <li class="role">Role</li>
+                    <li class="starting-date">Starting Date</li>
+                    <li class="status">Status</li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            {% set Ranges = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"] %}
+            {% set index = namespace(value=0) %}
+            {% for project_item in rows %}
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading{{Ranges[index.value]}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{Ranges[index.value]}}" aria-expanded="false" aria-controls="flush-collapse{{Ranges[index.value]}}">
+                            <ul class="project-row">
+
+                                <li class="project">
+                                    <!--PROJECT NAME-->
+                                    {{ project_item.project_name }}
+                                </li>
+                                <li class="role">
+                                    <!--ROLE-->
+                                    {{ project_item.role }}
+                                </li>
+                                <li class="starting-date">
+
+                                    <!--STARTING DATE-->
+                                    {{ project_item.starting_date }}
+                                </li>
+                                <li class="status">
+
+                                    <!--STATUS-->
+                                   {{ project_item.status }}
+                                </li>
+
+                            </ul>
+                        </button>
+                    </h2>
+                    <div id="flush-collapse{{Ranges[index.value]}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{Ranges[index.value]}}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+
+                            <!--PROJECT DESCRIPTION-->
+
+                            {{ project_item.description }}
+
+                            {% if project_item.status == pending %}
+                            <div>
+                                <form action="/mark_project_complete" method="post" >
+                                    <input type="text" name="project_id" value="{{ project_item.project_id }}" style="width:0px; height:0px; border:white;">
+                                    <input type="text" name="role" value="{{ project_item.role }}" style="width:0px; height:0px; border:white;">
+                                    <input type="submit" value="Mark as Complete" style="font-size:9px; padding:0px; margin-left:90%; background:#bed3ed;">
+                                </form>
+                            </div>
+                            {% endif %}
+
+                            <div>
+                                <form action="/delete_project" method="post" >
+                                    <input type="text" name="project_id" value="{{ project_item.project_id }}" style="width:0px; height:0px; border:white;">
+                                    <input type="text" name="role" value="{{ project_item.role }}" style="width:0px; height:0px; border:white;">
+                                    <input type="submit" value="Delete Project" style="font-size:9px; padding:0px; margin-left:90%; background:#c42f2f; color:white;">
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% set index.value = index.value + 1 %}
+            {% endfor %}
+            <nav aria-label="Page navigation example" style="width:265px; margin:0 auto; padding-top:40px;">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <form action="/projects" method="post">
+                            <label for="page">
+                            <input name="page" value="{{pages[0]-1}}" style="display:none;"></label>
+                            <input type="submit"
+                            {% if pages[0] == 0 %}
+                                style="background-color: grey;"
+                                disabled
+                            {% endif %}
+                            class="btn btn-primary page-link" value="Prev">
+                        </form>
+                    </li>
+                {% for page in range(pages[1])%}
+
+                    <li class="page-item">
+                        <form action="/projects" method="post">
+                            <label for="page"><input name="page" value="{{page}}" style="display:none;"></label>
+                            <input type="submit"
+                            {% if page == pages[0] %}
+                                style="background-color:#0dcaf0;"
+                            {% endif %}
+                            class="btn btn-primary page-link" value="{{page+1}}">
+                        </form>
+                    </li>
+                {% endfor %}
+                    <li class="page-item">
+                        <form action="/projects" method="post">
+                            <label for="page">
+                            <input name="page" value="{{pages[0]+1}}" style="display:none;"></label>
+                            <input type="submit"
+                            {% if pages[0] == pages[1] - 1 %}
+                                style="background-color: grey;"
+                                disabled
+                            {% endif %}
+                            class="btn btn-primary page-link" value="Next">
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock %}

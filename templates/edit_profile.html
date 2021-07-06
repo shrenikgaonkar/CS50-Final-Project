@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Edit Profile</title>
+
+{% endblock %}
+{% block main %}
+    <div class="profile-pic">
+        <form action="/delete_profile_pic" method="post" class="remove-profile"  data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Remove Profile Pic">
+            <input type="submit" value="X" class="remove-profile-item">
+        </form>
+        {% if document_status.profile_pic == 'YES' %}
+            <img src="{{ profile_pic_name }}" alt="Profile Pic" class="profile-pic-item">
+        {% else %}
+            <img src="/static/default-profile-pic.png" alt="Profile Pic" class="profile-pic-item">
+        {% endif %}
+    </div>
+
+    <form action="/edit_profile" method="post" class="details">
+        <fieldset>
+            <div class="row-detail">
+                <label for="first_name" class="info-type">First Name*: </label>
+                <input name="first_name" type="text" placeholder="Enter your first name" value="{{ first_name}}" class="input_space first_name detail-value">
+            </div>
+            <div class="row-detail">
+                <label for="surname"  class="info-type">Last Name*: </label>
+                <input name="surname" type="text" placeholder="Enter your surname name" value="{{ surname }}" class="input_space surname detail-value">
+            </div>
+            <div class="row-detail">
+                <label for="email"  class="info-type">Email*: </label>
+                <input type="text" placeholder="Enter your email" name="email" autocomplete="off" value="{{ email }}" class="input_space email detail-value">
+            </div>
+            <div class="row-detail">
+                <label for="cotact"  class="info-type">Contact No.*: </label>
+                <input type="text" placeholder="Enter your contact number" name="contact" autocomplete="off" value="{{ contact }}" class="input_space contact detail-value">
+            </div>
+            <div class="row-detail">
+                <label for="dob"  class="info-type">Date of Birth : </label>
+                <input type="date" placeholder="DD/MM/YYYY" name="dob" autocomplete="off" value="{{ dob }}" class="date dob detail-value">
+            </div>
+            <div class="row-detail">
+                <label for="joining_date"  class="info-type">Date of Joining : </label>
+                <input type="date" placeholder="DD/MM/YYYY" name="joining_date" autocomplete="off" value="{{ joining_date }}" class="date joining_date detail-value">
+            </div>
+            <div class="row-detail">
+                <label for="gender" class="gender info-type">Gender :</label>
+                <select name="gender" class="detail-value">
+                    <option selected value="{{ gender }}">{{ gender }}</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </fieldset>
+        <div style="color: red; text-align: center">{{ error }}</div>
+        <div class="d-grid col-1 submit mx-auto" style="margin-top: 20px;">
+            <input type="submit" value="Save" class="btn btn-primary">
+        </div>
+    </form>
+{% endblock %}
